@@ -19,22 +19,21 @@ $("#upload").click(function () {
                     reader.readAsText($("#fileUpload")[0].files[0]);
 
                     reader.onload = function (e) {
-                        var rows = e.target.result.split("\r\n");
+                        var rows = e.target.result.split("\n");
                         var req="name,email,phone";
                         var giv=(rows[0].toString()).trim();
-                        var giv1=(rows[1].toString()).trim();
-                        if(req===giv || req===giv1){
+                        if(req===giv){
                         var html= "<table border='1'>";
-                        for (var i = 0; i < rows.length; i++) {
+                        for (var i = 1; i < rows.length; i++) {
                             var cells = rows[i].split(",");
                             if (cells.length > 1) {
-                                if(cells[2]!="phone"){
+
                                 	$("#name").val(cells[0].replace(/"/g,''));
                                     $("#email").val(cells[1].replace(/"/g,''));
                                     $("#phone").val(cells[2].replace(/"/g,''));
                                     $("#sub_btn").trigger('click');
                                     data=JSON.parse(localStorage.getItem("storeddata"));
-                                }
+                                
                             }
                         }           
                                     text=$("#dvCSV").html();

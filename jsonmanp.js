@@ -82,8 +82,8 @@ var data=new Array();
                 alert("Update Successfull!!");
                 $("#updatedata").hide();
                 $("#viewdata").show();
-                viewdata();
                 localStorage.setItem("storeddata",JSON.stringify(data));
+                viewdata();
                 }
                 else
                     $("#success1").html("Duplicate Data entered");

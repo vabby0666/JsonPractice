@@ -29,7 +29,7 @@ $(search).click(function(){
 
     function viewdata(){
     	storedata();
-    	        var html='';
+    	var html='';
         if(data.length>0)
         {
             html+= "<table border='1'>";

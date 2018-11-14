@@ -12,7 +12,6 @@ var data=new Array();
             inputdata.name=formdata.get('name');
             inputdata.email=formdata.get('email');
             inputdata.phone=formdata.get('phone');
-            myform.reset();
         for(i=0;i<data.length;i++)
             if(data[i].email==inputdata.email)
             {
@@ -23,10 +22,10 @@ var data=new Array();
             }
         if(flag1==1){
         data.push(inputdata);
+        myform.reset();
         localStorage.setItem("storeddata",JSON.stringify(data));
         $("#success").css("color","green");
-        $("#success").html("Thanks for submission!! will contact you shortly.");
-        /*$("#view_btn").trigger('click');*/        
+        $("#success").html("Thanks for submission!! will contact you shortly.");       
         }
         else
             $("#success").html("duplicate data entered!!");
