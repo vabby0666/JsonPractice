@@ -1,10 +1,14 @@
 var data=new Array();
-    $(document).ready(function(){
-        if(localStorage.getItem("storeddata")!=null)      
+
+    var text;
+
+   function storedata(){
+   		if(localStorage.getItem("storeddata")!=null)      
             data=JSON.parse(localStorage.getItem("storeddata"));
-    });
+    }
 
     function modify(x){
+    	storedata();
         $("#updatedata").show();
         $("#viewdata").hide();      
         $(nameupd).val(data[x].name);
@@ -14,6 +18,7 @@ var data=new Array();
     }
 
     $(sub_btn).click(function(){
+
             var myform=document.getElementById('myform');
             formdata=new FormData(myform);
             var n=formdata.get('name');
@@ -21,17 +26,23 @@ var data=new Array();
             var p=formdata.get('phone');
             $("#success").css("color","red");
             if(n.length<3){
-                $("#success").html("Name should be more than 3 characters");   
-                
+                $("#success").html("Name should be more than 3 characters");
+                text=$(dvCSV).html();   
+                $(dvCSV).css("color","red");
+                $(dvCSV).html(text+ "<br> Name should be more than 3 characters where:"+n);
+                    
             }
             else if(e.indexOf('@') < 0 || e.indexOf('.') < 0 || e.lastIndexOf('.')<e.indexOf('@') || (e.lastIndexOf('.')+1)>=(e.length)) {
                 $("#success").html("invalid Email Address");   
-                
+                text=$(dvCSV).html();                
+                $(dvCSV).css("color","red");
+                $(dvCSV).html(text+"<br>invalid Email Address where:"+e);
             }
             else if(p.length!=10 || isNaN(p)){
-
                 $("#success").html("Enter a 10-digit Mobile Number");  
-                
+                text=$(dvCSV).html();
+                $(dvCSV).css("color","red");
+                $(dvCSV).html(text+" <br> Enter a 10-digit Mobile Number where:"+p);       
             }
             else{
                 dataadd();
@@ -39,6 +50,7 @@ var data=new Array();
     });
 
     $(updone).click(function(){
+    		storedata();
             var myform=document.getElementById('myform1');
             formdata=new FormData(myform);
             var n=formdata.get('nameupd');
@@ -70,7 +82,7 @@ var data=new Array();
                 alert("Update Successfull!!");
                 $("#updatedata").hide();
                 $("#viewdata").show();
-                $("#view_btn").trigger('click');
+                viewdata();
                 localStorage.setItem("storeddata",JSON.stringify(data));
                 }
                 else
@@ -79,9 +91,10 @@ var data=new Array();
     });
 
     function deletef(x){
+    	storedata();
         data.splice(x,1);
         localStorage.setItem("storeddata",JSON.stringify(data));
-        $("#view_btn").trigger('click');
+        viewdata();
     }
 
 function validate(evt) {
@@ -92,3 +105,8 @@ function validate(evt) {
         evt.returnValue=false;
     }  
 }
+
+$("#cancel").click(function(){
+    	$("#updatedata").hide();
+        $("#viewdata").show();
+    });

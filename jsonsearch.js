@@ -1,10 +1,7 @@
 var data=new Array()
-    $(document).ready(function(){
-        if(localStorage.getItem("storeddata")!=null)      
-            data=JSON.parse(localStorage.getItem("storeddata"));
-    });
 
 $(search).click(function(){
+	storedata();
         var ser=$(searchitem).val();
         var htm="<table border='1'><tr><th>Name</th><th>Email</th><th>Phone</th></tr>";
         var htm1=0;
@@ -27,7 +24,12 @@ $(search).click(function(){
 });
 
     $(view_btn).click(function(){
-        var html='';
+  		viewdata();
+    });
+
+    function viewdata(){
+    	storedata();
+    	        var html='';
         if(data.length>0)
         {
             html+= "<table border='1'>";
@@ -46,6 +48,5 @@ $(search).click(function(){
     }else
         html+="<p style='color:red;'>No data found</p>";
     
-    $("#viewdata").html(html);   
-    $(view_btn).hide();
-    });
+    $("#viewdata").html(html); 
+    }

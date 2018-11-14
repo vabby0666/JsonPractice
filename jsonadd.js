@@ -1,11 +1,10 @@
 
 var data=new Array();
-    $(document).ready(function(){
-        if(localStorage.getItem("storeddata")!=null)      
-            data=JSON.parse(localStorage.getItem("storeddata"));
-    });
+
+    var text;
 
     function dataadd(){
+    	storedata();
         var inputdata = {};
         var flag1=1;
         var myform=document.getElementById('myform');
@@ -16,13 +15,18 @@ var data=new Array();
             myform.reset();
         for(i=0;i<data.length;i++)
             if(data[i].email==inputdata.email)
+            {
                 flag1=0;
+                text=$(dvCSV).html();
+                $(dvCSV).css("color","red");
+                $(dvCSV).html(text+"<br> duplicate data found at:"+inputdata.email);
+            }
         if(flag1==1){
         data.push(inputdata);
         localStorage.setItem("storeddata",JSON.stringify(data));
         $("#success").css("color","green");
         $("#success").html("Thanks for submission!! will contact you shortly.");
-        $("#view_btn").trigger('click');        
+        /*$("#view_btn").trigger('click');*/        
         }
         else
             $("#success").html("duplicate data entered!!");

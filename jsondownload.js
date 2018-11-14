@@ -1,8 +1,7 @@
 var data=new Array();
 
-
     $(gen_btn).click(function(){
-    	data=JSON.parse(localStorage.getItem("storeddata"));
+    	storedata();
         JSONToCSVConvertor(data, "Submitted Details");   
     });
 
@@ -10,10 +9,7 @@ function JSONToCSVConvertor(JSONData, ReportTitle) {
     var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
     
     var CSV = '';    
-    
-    CSV += ReportTitle + '\r\n\n';
-
-    
+        
         var row = "";
         
         for (var index in arrData[0]) {
