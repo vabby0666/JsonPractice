@@ -70,7 +70,7 @@ def create_palindrome(word):
 # e.g ["apple", "dog", "elephant"] should result in ["elephant", "apple", "dog"]
 # hint: use list.sort, don't write your own
 def test_pow_of_each_item_in_list():
-    assert [1,4,9] == square_of_each_item_in_list([1,2,3])
+    assert [1,4,9,16] == square_of_each_item_in_list([1,2,3,4])
 
 def sort_by_length(words):
     if(words):
